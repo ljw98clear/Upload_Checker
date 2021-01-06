@@ -3,6 +3,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
+import selenium
+from selenium import webdriver
+
+
 #driverpath = './chromedriver'
 
 class Example(QMainWindow):
