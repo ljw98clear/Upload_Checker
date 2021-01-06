@@ -2,6 +2,16 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
 driverpath = './chromedriver'
+sleeptime = 0.2
+
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+URL = 'https://manatoki92.net/comic/122227?stx=%EC%9B%90%ED%94%BC%EC%8A%A4'
+
+driver = webdriver.Chrome(executable_path='chromedriver')
+driver.get(url=URL)
 
 class Example(QMainWindow):
     
