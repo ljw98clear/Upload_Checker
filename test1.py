@@ -1,6 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
+driverpath = './chromedriver'
+
 class Example(QMainWindow):
     
     def __init__(self):
@@ -15,7 +17,7 @@ class Example(QMainWindow):
 
         title = QComboBox(self)
         title.addItem("원피스")
-        title.addItem("Pear")
+        title.addItem("진격의거인")
         title.addItem("Lemon")
 
         title.move(180, 50)
