@@ -1,32 +1,39 @@
 import sys
-from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
-
-class Communicate(QObject):
-
-    closeApp = pyqtSignal()
-
-
-class MyApp(QMainWindow):
-
+class Example(QMainWindow):
+    
     def __init__(self):
         super().__init__()
-        self.initUI()
+                
+        site = QComboBox(self)
+        site.addItem("마나토끼")
+        site.addItem("Pear")
+        site.addItem("Lemon")
 
-    def initUI(self):
-        self.c = Communicate()
-        self.c.closeApp.connect(self.close)
+        site.move(40, 50)
 
-        self.setWindowTitle('Emitting Signal')
-        self.setGeometry(300, 300, 300, 200)
+        title = QComboBox(self)
+        title.addItem("원피스")
+        title.addItem("Pear")
+        title.addItem("Lemon")
+
+        title.move(180, 50)
+
+        self.qlabel = QLabel(self)
+        self.qlabel.move(50,16)
+
+        #site.activated[str].connect(self.onChanged)      
+
+        self.setGeometry(50,50,320,200)
+        self.setWindowTitle("QLineEdit Example")
         self.show()
 
-    def mousePressEvent(self, e):
-        self.c.closeApp.emit()
-
-
+    def onChanged(self, text):
+        self.qlabel.setText(text)
+        self.qlabel.adjustSize()
+        
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MyApp()
+    ex = Example()
     sys.exit(app.exec_())
