@@ -44,9 +44,11 @@ class manatoki:
         
     def routine(self):
         self.initSiteAndSearch()
-        self.specifyToon()
+        if self.specifyToon() == None:
+            return 2
+
         dataSub = datetime.datetime.now() - self.getDate()
         if dataSub.days < 3:
-            return True
+            return 0
         else: 
-            return False
+            return 1
