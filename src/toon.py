@@ -14,3 +14,8 @@ class toon:
             retval = self.site.routine()
             self.site.quit()
             return retval
+
+    def __del__(self):
+        if self.site != None:
+            self.site.quit()
+            print("객체 제거함")

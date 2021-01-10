@@ -1,4 +1,5 @@
 import json
+import copy
 
 f = open("./data.json", "r", encoding='UTF-8')
 data = json.load(f)
@@ -15,7 +16,7 @@ def addData(site, name):
         return 1
 
 def getData():
-    return data
+    return copy.deepcopy(data)
 
 def removeData(site, name):
     if name in data[site]:
