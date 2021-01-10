@@ -12,7 +12,6 @@ class toon:
     def checkUpload(self):
         if self.site != None:
             retval = self.site.routine()
-            self.site.quit()
             return retval
 
     def __del__(self):
