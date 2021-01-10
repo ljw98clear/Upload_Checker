@@ -9,8 +9,11 @@ import time
 class manatoki:
     def __init__(self, name):
         self.name = name
+        self.options = webdriver.ChromeOptions()
+        self.options.add_argument('headless')
         self.driver = \
-            webdriver.Chrome('../chromedriver/chromedriver.exe')
+            webdriver.Chrome('../chromedriver/chromedriver.exe', \
+            chrome_options=self.options)
         self.url = "https://manatoki92.net/"
 
     def initSiteAndSearch(self):
@@ -32,14 +35,17 @@ class manatoki:
             candidate = li.find('div', class_='in-lable trans-bg-black').string
             if candidate == self.name:
                 self.driver.get(href)
-                return
+                return 1
         return None
 
     def getDate(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
         date = soup.select_one('#serial-move > div > ul > li:nth-child(1) > '\
             + 'div.wr-date.hidden-xs').get_text().strip()
-        formalDate = datetime.datetime.strptime(date, "%Y.%m.%d")
+        try:
+            formalDate = datetime.datetime.strptime(date, "%Y.%m.%d")
+        except ValueError:
+            return "Today"
         return formalDate
         
     def routine(self):
@@ -47,7 +53,11 @@ class manatoki:
         if self.specifyToon() == None:
             return 2
 
-        dataSub = datetime.datetime.now() - self.getDate()
+        dateData = self.getDate()
+        if dateData == "Today":
+            return 0
+
+        dataSub = datetime.datetime.now() - dateData
         if dataSub.days < 3:
             return 0
         else: 
